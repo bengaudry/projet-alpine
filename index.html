@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
     <title>Blog - Accueil</title>
   </head>
-  <body>
-    <h1>Accueil</h1>
+
+  <body x-data="{ ARTICLES }">
+    <header>
+      <h1>Accueil</h1>
+    </header>
+
+    <main>
+      <ul>
+        <template x-for="article of ARTICLES" :key="article.id">
+          <li>
+            <a x-bind:href="`article.html?id=${article.id}`">
+              <p x-text="article.titre"></p>
+              <p x-text="article.resume"></p>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </body>
 </html>
