@@ -21,7 +21,7 @@
       <p class="nav-title">BLOG</p>
 
       <div class="nav-links">
-        <a href="index.html">Accueil</a>
+        <a href="index.html" aria-current="true">Accueil</a>
         <a href="contact.html">Contact</a>
       </div>
 
@@ -38,11 +38,11 @@
       </div>
     </nav>
 
-    <header>
-      <h1>Accueil</h1>
-    </header>
-
     <main>
+      <header>
+        <h1>Accueil</h1>
+      </header>
+
       <ul class="articles-container">
         <template x-for="article of ARTICLES" :key="article.id">
           <li class="article-link">

@@ -38,15 +38,18 @@
       </div>
     </nav>
 
-    <header>
-      <h1 x-text="article.titre">Article</h1>
-      <p>
-        <i x-text="article.date"></i>
-      </p>
-    </header>
-
     <main>
-      <p x-text="article.contenu"></p>
+      <header>
+        <img x-bind:src="article.imageUrl" width="150" alt="" />
+        <h1 x-text="article.titre">Article</h1>
+        <p>
+          <i x-text="article.date"></i>
+        </p>
+      </header>
+
+      <article>
+        <p x-text="article.contenu"></p>
+      </article>
     </main>
 
     <script>

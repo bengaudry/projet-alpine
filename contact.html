@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html
+  lang="fr"
+  x-data="{
+    theme: getTheme(),
+    toggleTheme() {
+      const newTheme = toggleStorageTheme();
+      this.theme = newTheme;
+    }
+  }"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Blog - Accueil</title>
+  </head>
+
+  <body x-bind:class="theme" x-data="{ ARTICLES }">
+    <nav>
+      <p class="nav-title">BLOG</p>
+
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="contact.html" aria-current="true">Contact</a>
+      </div>
+
+      <div class="theme-toggle-container">
+        <span>Sombre</span>
+        <input type="checkbox" id="theme-toggle" x-on:change="toggleTheme()" />
+        <label
+          class="theme-toggle"
+          for="theme-toggle"
+          x-bind:aria-checked="theme === 'dark' ? true : false"
+        >
+          <span></span>
+        </label>
+      </div>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Contact</h1>
+      </header>
+
+      <form @submit.prevent="submit">
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" x-model="email" />
+          <template x-if="errors.email">
+            <div class="error" x-text="errors.email"></div>
+          </template>
+        </div>
+        <div>
+          <label for="phone">Téléphone</label>
+          <input
+            type="tel"
+            id="phone"
+            x-model="phone"
+            placeholder="ex : 0612345678"
+          /><template x-if="errors.phone">
+            <div class="error" x-text="errors.phone"></div>
+          </template>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" x-model="message"></textarea>
+          <template x-if="errors.message">
+            <div class="error" x-text="errors.message"></div>
+          </template>
+        </div>
+        <button type="submit">Envoyer</button>
+      </form>
+      <template x-if="successMessage">
+        <p style="color: green; margin-top: 1rem" x-text="successMessage"></p>
+      </template>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </body>
+</html>
