@@ -4,3 +4,137 @@
   padding: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+ul {
+  list-style-type: none;
+}
+
+body.light {
+  background: #fff;
+  color: #000;
+}
+
+body.dark {
+  background: #121212;
+  color: #fff;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+body.light nav {
+  background-color: #e2e2e2;
+  box-shadow: 0 12px 28px 12px #42424220;
+}
+
+body.dark nav {
+  background-color: #242424;
+  box-shadow: 0 12px 28px 12px #80808015;
+}
+
+header {
+  padding: 2rem;
+}
+
+main {
+  padding: 0 2rem;
+  padding-bottom: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 150ms ease-out;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+a[aria-current="true"] {
+  font-weight: 600;
+}
+
+#theme-toggle {
+  display: none;
+}
+
+.theme-toggle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.theme-toggle {
+  display: block;
+  background: #71ffd7;
+  width: 48px;
+  height: 24px;
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+.theme-toggle > span {
+  display: block;
+  height: 100%;
+  aspect-ratio: 1/1;
+  background: #1eae86;
+  border-radius: 9999px;
+  transform-origin: center;
+  transition: transform ease-out 150ms;
+}
+
+.theme-toggle:hover > span {
+  scale: 0.9;
+}
+
+.theme-toggle[aria-checked="true"] > span {
+  transform: translateX(calc(48px - 24px - 1px));
+}
+
+.articles-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.article-link {
+  width: 100%;
+  height: 100%;
+  transition: transform 150ms ease-out;
+}
+
+.article-link:hover {
+  transform: translateY(-2%);
+}
+
+.article-link a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-link-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.article-link img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}

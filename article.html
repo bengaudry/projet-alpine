@@ -13,10 +13,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Blog - Accueil</title>
+    <title>Blog - Article</title>
   </head>
 
-  <body x-bind:class="theme" x-data="{ ARTICLES }">
+  <body x-bind:class="theme" x-data="dataForArticle()">
     <nav>
       <p class="nav-title">BLOG</p>
 
@@ -39,23 +39,31 @@
     </nav>
 
     <header>
-      <h1>Accueil</h1>
+      <h1 x-text="article.titre">Article</h1>
+      <p>
+        <i x-text="article.date"></i>
+      </p>
     </header>
 
     <main>
-      <ul class="articles-container">
-        <template x-for="article of ARTICLES" :key="article.id">
-          <li class="article-link">
-            <a x-bind:href="`article.html?id=${article.id}`">
-              <img x-bind:src="article.imageUrl" />
-              <p class="article-link-title" x-text="article.titre"></p>
-              <p class="article-link-subtitle" x-text="article.resume"></p>
-            </a>
-          </li>
-        </template>
-      </ul>
+      <p x-text="article.contenu"></p>
     </main>
 
+    <script>
+      function dataForArticle() {
+        const url = new URL(window.location);
+        const params = url.searchParams;
+
+        const articleId = params.get("id");
+
+        const article = ARTICLES.find(({ id }) => id === articleId);
+
+        return {
+          articleId,
+          article,
+        };
+      }
+    </script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </body>
