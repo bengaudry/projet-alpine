@@ -17,6 +17,7 @@
   </head>
 
   <body x-bind:class="theme" x-data="{ ARTICLES }">
+    <!-- Barre de navigation -->
     <nav>
       <p class="nav-title">BLOG</p>
 
@@ -44,6 +45,7 @@
       </header>
 
       <ul class="articles-container">
+        <!-- Affichage d'un lien pour chaque article -->
         <template x-for="article of ARTICLES" :key="article.id">
           <li class="article-link">
             <a x-bind:href="`article.html?id=${article.id}`">

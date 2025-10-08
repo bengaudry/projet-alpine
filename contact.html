@@ -13,10 +13,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Blog - Accueil</title>
+    <title>Blog - Contact</title>
   </head>
 
   <body x-bind:class="theme" x-data="{ ARTICLES }">
+    <!-- Barre de navigation -->
     <nav>
       <p class="nav-title">BLOG</p>
 
@@ -38,44 +39,85 @@
       </div>
     </nav>
 
-    <main>
+    <main class="contact-wrapper">
       <header>
         <h1>Contact</h1>
       </header>
 
-      <form @submit.prevent="submit">
-        <div>
+      <!-- Formulaire de contact -->
+      <form @submit.prevent="submit()" x-data="contactForm()">
+        <div class="input-container">
+          <label for="name">Nom</label>
+          <input type="name" id="name" x-model="name" placeholder="John Doe" />
+          <template x-if="errors.name">
+            <div class="input-error" x-text="errors.name"></div>
+          </template>
+        </div>
+        <div class="input-container">
           <label for="email">Email</label>
-          <input type="email" id="email" x-model="email" />
-          <template x-if="errors.email">
-            <div class="error" x-text="errors.email"></div>
-          </template>
-        </div>
-        <div>
-          <label for="phone">Téléphone</label>
           <input
-            type="tel"
-            id="phone"
-            x-model="phone"
-            placeholder="ex : 0612345678"
-          /><template x-if="errors.phone">
-            <div class="error" x-text="errors.phone"></div>
+            type="email"
+            id="email"
+            x-model="email"
+            placeholder="name@example.com"
+          />
+          <template x-if="errors.email">
+            <div class="input-error" x-text="errors.email"></div>
           </template>
         </div>
-        <div>
+        <div class="input-container">
           <label for="message">Message</label>
           <textarea id="message" rows="5" x-model="message"></textarea>
           <template x-if="errors.message">
-            <div class="error" x-text="errors.message"></div>
+            <div class="input-error" x-text="errors.message"></div>
           </template>
         </div>
         <button type="submit">Envoyer</button>
+        <template x-if="successMessage">
+          <p style="color: green; margin-top: 1rem" x-text="successMessage"></p>
+        </template>
       </form>
-      <template x-if="successMessage">
-        <p style="color: green; margin-top: 1rem" x-text="successMessage"></p>
-      </template>
     </main>
 
+    <script>
+      function contactForm() {
+        return {
+          email: "",
+          name: "",
+          message: "",
+          errors: {},
+          successMessage: "",
+
+          validateName(name) {
+            return name.length >= 3;
+          },
+          validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+          },
+          submit() {
+            this.errors = {};
+            this.successMessage = "";
+            if (!this.validateEmail(this.email)) {
+              this.errors.email = "Adresse email invalide.";
+            }
+            if (!this.validateName(this.name)) {
+              this.errors.name = "Le nom doit contenir au moins 3 caractères";
+            }
+            if (!this.message.trim()) {
+              this.errors.message = "Le message ne peut pas être vide.";
+            }
+            if (Object.keys(this.errors).length === 0) {
+              // Simuler l'envoi
+              this.successMessage = "✅ Message envoyé avec succès !";
+              this.email = "";
+              this.name = "";
+              this.message = "";
+            }
+          },
+        };
+      }
+    </script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </body>

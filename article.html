@@ -17,6 +17,7 @@
   </head>
 
   <body x-bind:class="theme" x-data="dataForArticle()">
+    <!-- Barre de navigation -->
     <nav>
       <p class="nav-title">BLOG</p>
 
@@ -39,14 +40,17 @@
     </nav>
 
     <main>
+      <!-- Informations sur l'article -->
       <header>
         <img x-bind:src="article.imageUrl" width="150" alt="" />
         <h1 x-text="article.titre">Article</h1>
+        <p x-text="article.resume"></p>
         <p>
           <i x-text="article.date"></i>
         </p>
       </header>
-
+      
+      <!-- Corps de l'article -->
       <article>
         <p x-text="article.contenu"></p>
       </article>
@@ -54,12 +58,16 @@
 
     <script>
       function dataForArticle() {
+        // Récupération de l'id de l'article en paramètre dans l'url
         const url = new URL(window.location);
         const params = url.searchParams;
-
         const articleId = params.get("id");
 
+        // Récupération du contenu de l'article
         const article = ARTICLES.find(({ id }) => id === articleId);
+
+        // Changement du titre de la page par le nom de l'article
+        if (article.titre) document.title = "Blog - " + article.titre
 
         return {
           articleId,
