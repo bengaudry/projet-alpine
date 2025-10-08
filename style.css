@@ -106,6 +106,13 @@ article {
   max-width: 680px;
 }
 
+.nav-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 480px) {
   .nav-title {
     display: none;
